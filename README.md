@@ -1,95 +1,49 @@
 # snake-fugas
-# Сутності #:
-**Cell** - одиниця поля
-При створенні приймає координати
-Властивості:
-	free<bool> - вільна або зайнята
-	customTexture
-	changeDir<bool>
-	direction<char>?
+РЎСѓС‚РЅРѕСЃС‚С– #:
+Cell - РѕРґРёРЅРёС†СЏ РїРѕР»СЏ РџСЂРё СЃС‚РІРѕСЂРµРЅРЅС– РїСЂРёР№РјР°С” РєРѕРѕСЂРґРёРЅР°С‚Рё Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: free - РІС–Р»СЊРЅР° Р°Р±Рѕ Р·Р°Р№РЅСЏС‚Р° customTexture changeDir direction?
 
-Методи:
-	ChangeDir(newDir):
-		if(newDir == ' ')
-			changeDir = false;
-		direction = newDir;	
+РњРµС‚РѕРґРё: ChangeDir(newDir): if(newDir == ' ') changeDir = false; direction = newDir;
 
-**Field** - поле
-При створенні поля, отримувати крок (розмір спрайта)
-Властивості:	
-	rows<int>
-	cols<int>
-	cells<Cell[rows][cols]> - двомірний масив комірок
+Field - РїРѕР»Рµ РџСЂРё СЃС‚РІРѕСЂРµРЅРЅС– РїРѕР»СЏ, РѕС‚СЂРёРјСѓРІР°С‚Рё РєСЂРѕРє (СЂРѕР·РјС–СЂ СЃРїСЂР°Р№С‚Р°) Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: rows cols cells<Cell[rows][cols]> - РґРІРѕРјС–СЂРЅРёР№ РјР°СЃРёРІ РєРѕРјС–СЂРѕРє
 
-Методи:
-	GetCell(int row, int col):
-		return cells[row][col];	
+РњРµС‚РѕРґРё: GetCell(int row, int col): return cells[row][col];
 
-**Bodypart**
-Властивості:
-	cell<Cell>
-	dir<char>
+Bodypart Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: cell dir
 
-Методи:
-	ChangeDir(newDir):
-		dir = newDir;	
-	
-**Food**
-Властивості:
-	customTexture
-	score<int>? - збільшення рахунку на
-	tag<string>
+РњРµС‚РѕРґРё: ChangeDir(newDir): dir = newDir;
 
-Методи:
-	Destroy:
-		GameManager.UpdateScore(score);
-		викликає додавання score
-		знищує об єкт
+Food Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: customTexture score? - Р·Р±С–Р»СЊС€РµРЅРЅСЏ СЂР°С…СѓРЅРєСѓ РЅР° tag
 
-**Snake**
-При створенні завантажує текстури
-Властивості:
-	direction<char>
-	body<bodypart>
-	tag<string>
+РњРµС‚РѕРґРё: Destroy: GameManager.UpdateScore(score); РІРёРєР»РёРєР°С” РґРѕРґР°РІР°РЅРЅСЏ score Р·РЅРёС‰СѓС” РѕР± С”РєС‚
 
-Методи:
-	canMoveTo(int row, int col):
-		
-	Move:
-		
-		переміщення гравця відповідно до напрямку
-		
-	ChangeDir(newDir):
-		Зміна руху
-		
+Snake РџСЂРё СЃС‚РІРѕСЂРµРЅРЅС– Р·Р°РІР°РЅС‚Р°Р¶СѓС” С‚РµРєСЃС‚СѓСЂРё Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: direction body tag
 
-**GameManager**
-Створює поле і гравця.
-Властивості:
-	player<Snake>
-	field<Field>
-	score<int>?
-	
-Методи:
-	static UpdateScore(+score)
-		this->score += score;
-	
-	ChangeMoveDir(newDir):
-		//
-		for(part : player.body):
-			part_cell = part.getCell()
-			newCell = field.getNextCellByDir(part_cell, newDir);
-			part.setCell(newCell)
-		//
-		cell = field.getCell(player.head)
-		cell.changeDir(newDir)
-		player.changeDir(newDir)
-		
-	PerformGameSession:
-		завантажити спрайти
-		створити поле
-		згенерувати границі
-		створити гравця
-		рандомно розмістити food
-	
+РњРµС‚РѕРґРё: canMoveTo(int row, int col):
+
+Move:
+
+РїРµСЂРµРјС–С‰РµРЅРЅСЏ РіСЂР°РІС†СЏ РІС–РґРїРѕРІС–РґРЅРѕ РґРѕ РЅР°РїСЂСЏРјРєСѓ
+
+ChangeDir(newDir):
+Р—РјС–РЅР° СЂСѓС…Сѓ
+GameManager РЎС‚РІРѕСЂСЋС” РїРѕР»Рµ С– РіСЂР°РІС†СЏ. Р’Р»Р°СЃС‚РёРІРѕСЃС‚С–: player field score?
+
+РњРµС‚РѕРґРё: static UpdateScore(+score) this->score += score;
+
+ChangeMoveDir(newDir):
+//
+for(part : player.body):
+part_cell = part.getCell()
+newCell = field.getNextCellByDir(part_cell, newDir);
+part.setCell(newCell)
+//
+cell = field.getCell(player.head)
+cell.changeDir(newDir)
+player.changeDir(newDir)
+
+PerformGameSession:
+Р·Р°РІР°РЅС‚Р°Р¶РёС‚Рё СЃРїСЂР°Р№С‚Рё
+СЃС‚РІРѕСЂРёС‚Рё РїРѕР»Рµ
+Р·РіРµРЅРµСЂСѓРІР°С‚Рё РіСЂР°РЅРёС†С–
+СЃС‚РІРѕСЂРёС‚Рё РіСЂР°РІС†СЏ
+СЂР°РЅРґРѕРјРЅРѕ СЂРѕР·РјС–СЃС‚РёС‚Рё food
