@@ -1,61 +1,67 @@
 #include <iostream>
 #include <SDL.h>
+#include "GameManager.h"
 
-// You shouldn't really use this statement, but it's fine for small programs
-using namespace std;
 
-// You must include the command line parameters for your main function to be recognized by SDL
+SDL_Texture* loadImage(std::string file_name, SDL_Renderer* t_renderer) {
+	SDL_Texture* texture = nullptr;
+	SDL_Surface* surf = nullptr;
+	surf = SDL_LoadBMP(file_name.c_str());
+
+	if (surf != nullptr) {
+		texture = SDL_CreateTextureFromSurface(t_renderer, surf);
+		SDL_FreeSurface(surf);
+	}
+	return texture;
+}
+
 int main(int argc, char** args) {
 
-	// Pointers to our window and surface
-	SDL_Surface* winSurface = NULL;
-	SDL_Window* window = NULL;
+	SDL_Surface* winSurface = nullptr;
+	SDL_Window* window = nullptr;
+	SDL_Renderer* renderer = nullptr;
+	const int WINDOW_WIDTH = 1280;
+	const int WINDOW_HEIGHT = 720;
 
-	// Initialize SDL. SDL_Init will return -1 if it fails.
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		cout << "Error initializing SDL: " << SDL_GetError() << endl;
+		std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
 		system("pause");
-		// End the program
 		return 1;
 	}
 
-	// Create our window
-	window = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 
-	// Make sure creating the window succeeded
 	if (!window) {
-		cout << "Error creating window: " << SDL_GetError() << endl;
+		std::cout << "Error creating window: " << SDL_GetError() << std::endl;
 		system("pause");
-		// End the program
 		return 1;
 	}
 
-	// Get the surface from the window
-	winSurface = SDL_GetWindowSurface(window);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	GameManager gm(renderer);
+	SDL_Texture* cell_texture = loadImage("1.bmp", renderer);
+	SDL_Texture* player_texture = loadImage("2.bmp", renderer);
+	SDL_Rect rect = { 0,0,20,20 };
+	gm.PerformGameSession(rect, cell_texture, player_texture, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	// Make sure getting the surface succeeded
-	if (!winSurface) {
-		cout << "Error getting surface: " << SDL_GetError() << endl;
-		system("pause");
-		// End the program
-		return 1;
+	bool quit = false;
+	while (!quit) {
+		SDL_Event e;
+		while (SDL_PollEvent(&e) != 0) {
+			if (e.type == SDL_QUIT) {
+				quit = true;
+				break;
+			}
+		}
+
+		SDL_RenderClear(renderer);
+		gm.Render();
+		SDL_RenderPresent(renderer);
 	}
 
-	// Fill the window with a white rectangle
-	SDL_FillRect(winSurface, NULL, SDL_MapRGB(winSurface->format, 255, 255, 255));
-
-	// Update the window display
-	SDL_UpdateWindowSurface(window);
-
-	// Wait
-	system("pause");
-
-	// Destroy the window. This will also destroy the surface
+	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-
-	// Quit SDL
 	SDL_Quit();
 
-	// End the program
 	return 0;
 }

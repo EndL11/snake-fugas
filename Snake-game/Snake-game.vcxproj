@@ -142,7 +142,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BodyPart.cpp" />
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CustomTexture.cpp" />
+    <ClCompile Include="Field.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Snake.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BodyPart.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="CustomTexture.h" />
+    <ClInclude Include="Field.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
