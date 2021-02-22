@@ -1,49 +1,93 @@
 # snake-fugas
 Сутності #:
-Cell - одиниця поля При створенні приймає координати Властивості: free - вільна або зайнята customTexture changeDir direction?
+Cell - одиниця поля 
+При створенні приймає координати 
+Властивості: 
+    free - вільна або зайнята 
+    customTexture 
+    changeDir 
+    direction?
 
-Методи: ChangeDir(newDir): if(newDir == ' ') changeDir = false; direction = newDir;
+Методи: 
+    ChangeDir(newDir): 
+        if(newDir == ' ') 
+            changeDir = false; 
+        direction = newDir;
 
-Field - поле При створенні поля, отримувати крок (розмір спрайта) Властивості: rows cols cells<Cell[rows][cols]> - двомірний масив комірок
 
-Методи: GetCell(int row, int col): return cells[row][col];
+Field - поле 
+При створенні поля, отримувати крок (розмір спрайта) 
+Властивості: 
+    rows 
+    cols 
+    cells<Cell[rows][cols]> - двомірний масив комірок
 
-Bodypart Властивості: cell dir
+Методи: 
+    GetCell(int row, int col): 
+        return cells[row][col];
 
-Методи: ChangeDir(newDir): dir = newDir;
+Bodypart 
+Властивості: 
+    cell 
+    dir
 
-Food Властивості: customTexture score? - збільшення рахунку на tag
+Методи: 
+    ChangeDir(newDir): 
+        dir = newDir;
 
-Методи: Destroy: GameManager.UpdateScore(score); викликає додавання score знищує об єкт
+Food 
+Властивості: 
+    customTexture 
+    score? - збільшення рахунку на 
+    tag
 
-Snake При створенні завантажує текстури Властивості: direction body tag
+Методи: 
+    Destroy: 
+        GameManager.UpdateScore(score); 
+        викликає додавання score 
+        знищує об єкт
 
-Методи: canMoveTo(int row, int col):
+Snake 
+При створенні завантажує текстури 
+Властивості: 
+    direction 
+    body 
+    tag
 
-Move:
+Методи: 
+    canMoveTo(int row, int col):
 
-переміщення гравця відповідно до напрямку
+    Move:   
+        переміщення гравця відповідно до напрямку
 
-ChangeDir(newDir):
-Зміна руху
-GameManager Створює поле і гравця. Властивості: player field score?
+    ChangeDir(newDir):
+        Зміна руху
 
-Методи: static UpdateScore(+score) this->score += score;
+GameManager 
+Створює поле і гравця. 
+Властивості: 
+    player 
+    field 
+    score?
 
-ChangeMoveDir(newDir):
-//
-for(part : player.body):
-part_cell = part.getCell()
-newCell = field.getNextCellByDir(part_cell, newDir);
-part.setCell(newCell)
-//
-cell = field.getCell(player.head)
-cell.changeDir(newDir)
-player.changeDir(newDir)
+Методи: 
+    UpdateScore(+score) 
+        this->score += score;
 
-PerformGameSession:
-завантажити спрайти
-створити поле
-згенерувати границі
-створити гравця
-рандомно розмістити food
+    ChangeMoveDir(newDir):
+        //
+        for(part : player.body):
+        part_cell = part.getCell()
+        newCell = field.getNextCellByDir(part_cell, newDir);
+        part.setCell(newCell)
+        //
+        cell = field.getCell(player.head)
+        cell.changeDir(newDir)
+        player.changeDir(newDir)
+
+    PerformGameSession:
+        завантажити спрайти
+        створити поле
+        згенерувати границі
+        створити гравця
+        рандомно розмістити food
