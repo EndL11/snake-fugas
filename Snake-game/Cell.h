@@ -9,10 +9,11 @@ private:
 	char m_dir;
 public:
 	Cell();
-	Cell(SDL_Rect& t_rect, SDL_Texture* t_texture);
+	Cell(SDL_Rect t_rect, SDL_Texture* t_texture);
 	~Cell();
 	bool free();
 	bool changeDir();
 	char dir();
 	void changeDirection(char dir);
+	void render(SDL_Renderer* t_renderer);
 };

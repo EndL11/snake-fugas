@@ -1,5 +1,5 @@
 #include "Field.h"
-
+#include <iostream>
 Field::Field():rows(0), cols(0) {};
 Field::Field(int WINDOW_WIDTH, int WINDOW_HEIGHT, int w, int h) {
 	int rows = WINDOW_HEIGHT / h;
@@ -9,16 +9,25 @@ Field::Field(int WINDOW_WIDTH, int WINDOW_HEIGHT, int w, int h) {
 };
 Field::~Field() {};
 
-void Field::generateField(SDL_Rect& t_rect, SDL_Texture* t_texture) {
+void Field::generateField(SDL_Rect t_rect, SDL_Texture* t_texture) {
 	for (int i = 0; i < rows; i++) {
 		std::vector<Cell> row;
 		for (int j = 0; j < cols; j++) {
 			row.push_back(Cell(t_rect, t_texture));
+			t_rect.x += t_rect.w;
 		}
 		cells.push_back(row);
+		t_rect.y += t_rect.h;
 	}
 }
 
 Cell Field::getCell(int row, int col) {
 	return cells[row][col];
+}
+void Field::renderField(SDL_Renderer* t_renderer) {
+	for (auto row : cells) {
+		for (auto cell : row) {
+			cell.render(t_renderer);
+		}
+	}
 }

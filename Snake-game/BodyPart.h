@@ -5,6 +5,7 @@ class BodyPart {
 private:
 	Cell m_cell;
 	std::string m_tag = "player";
+	SDL_Texture* texture;
 public:
 	BodyPart();
 	BodyPart(Cell t_cell);
