@@ -57,7 +57,7 @@ int main(int argc, char** args) {
 		}
 		SDL_SetRenderDrawColor(renderer, 105, 105, 105, 255);
 		SDL_RenderClear(renderer);
-		gm.Render();
+		gm.Render(&e);
 		SDL_RenderPresent(renderer);
 		SDL_Delay(100);
 	}

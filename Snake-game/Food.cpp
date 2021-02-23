@@ -7,3 +7,30 @@ CustomTexture Food::texture() { return this->m_texture; }
 void Food::render(SDL_Renderer* t_renderer) {
 	SDL_RenderCopy(t_renderer, m_texture.texture(), nullptr, &m_texture.rect());
 }
+void Food::replaceFood(Field t_field) {
+	int randRow = rand() % t_field.rows();
+	int randCol = rand() % t_field.cols();
+	Cell cell = t_field.getCell(randRow, randCol);
+	while (!cell.free())
+	{
+		randRow = rand() % t_field.rows();
+		randCol = rand() % t_field.cols();
+		cell = t_field.getCell(randRow, randCol);
+	}
+	cell.changeFree(false);
+	m_texture.setRect({ cell.texture().rect().x, cell.texture().rect().y, m_texture.rect().w, m_texture.rect().h });
+}
+
+Food Food::generateFood(SDL_Texture* t_texture, Field t_field) {
+	int randRow = rand() % t_field.rows();
+	int randCol = rand() % t_field.cols();
+	Cell cell = t_field.getCell(randRow, randCol);
+	while (!cell.free())
+	{
+		randRow = rand() % t_field.rows();
+		randCol = rand() % t_field.cols();
+		cell = t_field.getCell(randRow, randCol);
+	}
+	cell.changeFree(false);
+	return Food(cell.texture().rect(), t_texture);
+}

@@ -10,4 +10,5 @@ public:
 	~CustomTexture();
 	SDL_Rect rect();
 	SDL_Texture* texture();
+	void setRect(SDL_Rect t_rect);
 };

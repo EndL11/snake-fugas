@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Field.h"
 #include "CustomTexture.h"
 class Food {
 private:
@@ -12,5 +13,7 @@ public:
 	~Food();
 	std::string tag();
 	CustomTexture texture();
+	void replaceFood(Field t_field);
 	void render(SDL_Renderer* t_renderer);
+	Food generateFood(SDL_Texture* t_texture, Field t_field);
 };

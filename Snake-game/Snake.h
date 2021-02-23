@@ -1,15 +1,17 @@
 #pragma once
-#include <SDL.h>
+#include "BodyPart.h"
+#include "Field.h"
 #include <list>
 #include <string>
 class Snake {
 private:
-	int parts = 2;
-	std::list<SDL_Point> body;
+	std::list<BodyPart> body;
 	char direction = 'r';
-	std::string m_tag;
 public:
 	Snake();
+	Snake(Cell t_cell, SDL_Rect t_rect, SDL_Texture* t_texture);
 	~Snake();
-	std::string tag();
+	void render(SDL_Renderer* t_renderer);
+	bool move(Field field);
+	void changeDir(char new_dir);
 };
