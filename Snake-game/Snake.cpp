@@ -12,14 +12,16 @@ void Snake::render(SDL_Renderer* t_renderer) {
 }
 bool Snake::move(Field field) {
 	for (auto &part : body) {
-		Cell nextCell = field.nextCellByDirection(part.cell(), direction);
-		if (nextCell.texture().texture() == nullptr) {
-			std::cout << "Game Over" << std::endl;
-			return false;
+		if (direction != ' ') {
+			Cell nextCell = field.nextCellByDirection(part.cell(), direction);
+			if (nextCell.texture().texture() == nullptr) {
+				std::cout << "Game Over" << std::endl;
+				return false;
+			}
+			part.cell().changeFree(true);
+			part.setCell(nextCell);
+			nextCell.changeFree(false);
 		}
-		part.cell().changeFree(true);
-		part.setCell(nextCell);
-		nextCell.changeFree(false);
 		return true;
 	}
 }

@@ -1,7 +1,7 @@
 #include "GameManager.h"
-GameManager::GameManager(): score(0), renderer(nullptr), food_texture(nullptr), m_food() {};
+GameManager::GameManager(): m_score(0), renderer(nullptr), food_texture(nullptr), m_food() {};
 GameManager::GameManager(SDL_Renderer* t_renderer, SDL_Texture* t_food_texture)
-	: renderer(t_renderer), score(0), m_food(), food_texture(t_food_texture) 
+	: renderer(t_renderer), m_score(0), m_food(), food_texture(t_food_texture)
 {};
 GameManager::~GameManager() {};
 void GameManager::PerformGameSession(SDL_Rect t_rect, SDL_Texture* cell_texture, SDL_Texture* player_texture, int w_w, int w_h) {
@@ -15,37 +15,44 @@ void GameManager::PerformGameSession(SDL_Rect t_rect, SDL_Texture* cell_texture,
 	player = snake;
 	m_food = this->m_food.generateFood(food_texture, m_field);
 };
-void GameManager::UpdateScore(int t_score) {
-	this->score += t_score;
-};
-void GameManager::Render(SDL_Event *e) {
 
-	const Uint8* state = SDL_GetKeyboardState(NULL);
+bool GameManager::Render() {
 
-	if (state[SDL_SCANCODE_W]) {
-		player.changeDir('u');
-	}
-	if (state[SDL_SCANCODE_S]) {
-		player.changeDir('d');
-	}
-	if (state[SDL_SCANCODE_A]) {
-		player.changeDir('l');
-	}
-	if (state[SDL_SCANCODE_D]) {
-		player.changeDir('r');
-	}
 	this->m_field.renderField(this->renderer);
 	m_food.render(this->renderer);
-
-	if (player.nextHeadCell(m_field) == m_food.cell()) {
-		UpdateScore(m_food.score());
-		m_food.replaceFood(m_field);
-		std::cout << score << std::endl;
-	}
-
-	if (!(player.move(this->m_field))) {
-		std::cout << "Game manager game over" << std::endl;
-		return;
-	}
 	player.render(this->renderer);
+
+	if (!game_over) {
+
+		const Uint8* state = SDL_GetKeyboardState(NULL);
+
+		if (state[SDL_SCANCODE_W]) {
+			player.changeDir('u');
+		}
+		else if (state[SDL_SCANCODE_S]) {
+			player.changeDir('d');
+		}
+		else if (state[SDL_SCANCODE_A]) {
+			player.changeDir('l');
+		}
+		else if (state[SDL_SCANCODE_D]) {
+			player.changeDir('r');
+		}
+
+		if (player.nextHeadCell(m_field) == m_food.cell()) {
+			m_score += 1;
+			m_food.replaceFood(m_field);
+			std::cout << m_score << std::endl;
+		}
+
+		if (!(player.move(this->m_field))) {
+			std::cout << "Game manager game over" << std::endl;
+			game_over = true;
+			return false;
+		}
+	}
+	SDL_Delay(50);
+	return true;
 };
+
+int GameManager::score() { return this->m_score; }

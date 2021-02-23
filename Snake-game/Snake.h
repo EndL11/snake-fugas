@@ -6,7 +6,7 @@
 class Snake {
 private:
 	std::list<BodyPart> body;
-	char direction = 'r';
+	char direction = ' ';
 public:
 	Snake();
 	Snake(Cell t_cell, SDL_Rect t_rect, SDL_Texture* t_texture);
