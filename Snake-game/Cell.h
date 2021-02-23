@@ -22,4 +22,6 @@ public:
 	int col();
 	int row();
 	void changeFree(bool is_free);
+	friend bool operator==(Cell& lcell, Cell& rcell) { return lcell.m_row == rcell.m_row && lcell.m_col == rcell.m_col; }
+	friend bool operator==(Cell lcell, Cell rcell) { return lcell.m_row == rcell.m_row && lcell.m_col == rcell.m_col; }
 };

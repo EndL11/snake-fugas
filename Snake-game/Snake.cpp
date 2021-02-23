@@ -27,3 +27,7 @@ bool Snake::move(Field field) {
 void Snake::changeDir(char new_dir) {
 	direction = new_dir;
 }
+
+Cell Snake::nextHeadCell(Field field) {
+	return field.nextCellByDirection(body.front().cell(), direction);
+}

@@ -14,4 +14,5 @@ public:
 	void render(SDL_Renderer* t_renderer);
 	bool move(Field field);
 	void changeDir(char new_dir);
+	Cell nextHeadCell(Field field);
 };

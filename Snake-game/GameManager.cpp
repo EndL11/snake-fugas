@@ -19,7 +19,9 @@ void GameManager::UpdateScore(int t_score) {
 	this->score += t_score;
 };
 void GameManager::Render(SDL_Event *e) {
+
 	const Uint8* state = SDL_GetKeyboardState(NULL);
+
 	if (state[SDL_SCANCODE_W]) {
 		player.changeDir('u');
 	}
@@ -32,9 +34,15 @@ void GameManager::Render(SDL_Event *e) {
 	if (state[SDL_SCANCODE_D]) {
 		player.changeDir('r');
 	}
-
 	this->m_field.renderField(this->renderer);
 	m_food.render(this->renderer);
+
+	if (player.nextHeadCell(m_field) == m_food.cell()) {
+		UpdateScore(m_food.score());
+		m_food.replaceFood(m_field);
+		std::cout << score << std::endl;
+	}
+
 	if (!(player.move(this->m_field))) {
 		std::cout << "Game manager game over" << std::endl;
 		return;

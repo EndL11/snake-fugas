@@ -22,3 +22,4 @@ int Cell::row() { return this->m_row; }
 int Cell::col() { return this->m_col; }
 
 void Cell::changeFree(bool is_free) { this->m_free = is_free; }
+

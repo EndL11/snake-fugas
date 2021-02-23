@@ -59,9 +59,11 @@ int main(int argc, char** args) {
 		SDL_RenderClear(renderer);
 		gm.Render(&e);
 		SDL_RenderPresent(renderer);
-		SDL_Delay(100);
+		SDL_Delay(150);
 	}
-
+	SDL_DestroyTexture(food_texture);
+	SDL_DestroyTexture(player_texture);
+	SDL_DestroyTexture(cell_texture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

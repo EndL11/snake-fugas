@@ -56,7 +56,7 @@ Cell Field::nextCellByDirection(Cell current, char dir) {
 		return cells[--row][col];
 	}
 	else if (dir == 'd') {
-		if (row >= m_rows) {
+		if (row + 1 >= m_rows) {
 			return Cell();
 		}
 		return cells[++row][col];
