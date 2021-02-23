@@ -18,6 +18,7 @@ void Field::generateField(SDL_Rect t_rect, SDL_Texture* t_texture) {
 		}
 		cells.push_back(row);
 		t_rect.y += t_rect.h;
+		t_rect.x = 0;
 	}
 }
 

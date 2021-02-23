@@ -28,7 +28,7 @@ int main(int argc, char** args) {
 		return 1;
 	}
 
-	window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
 	if (!window) {
 		std::cout << "Error creating window: " << SDL_GetError() << std::endl;
