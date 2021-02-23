@@ -32,3 +32,17 @@ void Field::renderField(SDL_Renderer* t_renderer) {
 		}
 	}
 }
+
+Food Field::generateFood(SDL_Texture* t_texture) {
+	int randRow = rand() % rows;
+	int randCol = rand() % cols;
+	Cell cell = getCell(randRow, randCol);
+	while (!cell.free())
+	{
+		randRow = rand() % rows;
+		randCol = rand() % cols;
+		cell = getCell(randRow, randCol);
+	}
+	
+	return Food(cell.texture().rect(), t_texture);
+}

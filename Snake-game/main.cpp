@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL.h>
+#include <time.h>
 #include "GameManager.h"
 
 
@@ -16,7 +17,7 @@ SDL_Texture* loadImage(std::string file_name, SDL_Renderer* t_renderer) {
 }
 
 int main(int argc, char** args) {
-
+	srand(time(NULL));
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 	const int WINDOW_WIDTH = 900;
@@ -40,9 +41,10 @@ int main(int argc, char** args) {
 
 	SDL_Texture* cell_texture = loadImage("1.bmp", renderer);
 	SDL_Texture* player_texture = loadImage("2.bmp", renderer);
+	SDL_Texture* food_texture = loadImage("4.bmp", renderer);
 	SDL_Rect rect = { 0,0,30,30};
 
-	GameManager gm(renderer);
+	GameManager gm(renderer, food_texture);
 	gm.PerformGameSession(rect, cell_texture, player_texture, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	bool quit = false;
@@ -57,6 +59,7 @@ int main(int argc, char** args) {
 		SDL_RenderClear(renderer);
 		gm.Render();
 		SDL_RenderPresent(renderer);
+		SDL_Delay(100);
 	}
 
 	SDL_DestroyRenderer(renderer);

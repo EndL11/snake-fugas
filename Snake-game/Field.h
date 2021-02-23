@@ -1,5 +1,6 @@
 #pragma once
 #include "Cell.h"
+#include "Food.h"
 #include <vector>
 class Field {
 private:
@@ -13,4 +14,5 @@ public:
 	Cell getCell(int row, int col);
 	void generateField(SDL_Rect t_rect, SDL_Texture* t_texture);
 	void renderField(SDL_Renderer* t_renderer);
+	Food generateFood(SDL_Texture* t_texture);
 };

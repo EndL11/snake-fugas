@@ -3,7 +3,7 @@
 #include "CustomTexture.h"
 class Cell {
 private:
-	CustomTexture texture;
+	CustomTexture m_texture;
 	bool m_free;
 	bool m_changeDir;
 	char m_dir;
@@ -16,4 +16,5 @@ public:
 	char dir();
 	void changeDirection(char dir);
 	void render(SDL_Renderer* t_renderer);
+	CustomTexture texture();
 };

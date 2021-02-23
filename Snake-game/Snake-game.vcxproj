@@ -149,6 +149,7 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CustomTexture.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CustomTexture.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Snake.h" />
   </ItemGroup>
