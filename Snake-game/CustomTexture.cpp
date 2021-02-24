@@ -6,8 +6,6 @@ CustomTexture::CustomTexture()
 {}
 CustomTexture::~CustomTexture() {}
 
-
-
 SDL_Rect CustomTexture::rect() {
 	return this->m_rect;
 }
