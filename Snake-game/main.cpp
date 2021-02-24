@@ -56,7 +56,7 @@ int main(int argc, char** args) {
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	font = TTF_OpenFont("oi.ttf", 50);
+	font = TTF_OpenFont("oi.ttf", 30);
 
 	SDL_Texture* cell_texture = loadImage("1.bmp", renderer);
 	SDL_Texture* player_texture = loadImage("2.bmp", renderer);
@@ -88,20 +88,20 @@ int main(int argc, char** args) {
 		
 		if (game_over) {
 			SDL_Texture* text_texture = getTextTexture(font, "GAME OVER", renderer);
-			SDL_Rect rect_game_over = { WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3, 200, 100 };
+			SDL_Rect rect_game_over = { WINDOW_WIDTH / 3 - 80, WINDOW_HEIGHT / 3, 400, 200 };
 			SDL_RenderCopy(renderer, text_texture, nullptr, &rect_game_over);
 			SDL_DestroyTexture(text_texture);
 		}
 		//	TODO: show best score
 		//	TODO: make user interface
 
-		SDL_Rect rect_score = { WINDOW_WIDTH / 2 - 150, 0, 150, 80 };
-		SDL_Texture* score_texture = getTextTexture(font, ("Score: " + std::to_string(gm.score())), renderer);
+		SDL_Rect rect_score = { WINDOW_WIDTH / 2 - 30, 0, 40, 60 };
+		SDL_Texture* score_texture = getTextTexture(font, std::to_string(gm.score()), renderer);
 		SDL_RenderCopy(renderer, score_texture, nullptr, &rect_score);
 
 		SDL_RenderPresent(renderer);
-		SDL_Delay(50);
 		SDL_DestroyTexture(score_texture);
+		SDL_Delay(75);
 	}
 
 	SDL_DestroyTexture(food_texture);

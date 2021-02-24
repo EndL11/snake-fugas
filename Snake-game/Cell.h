@@ -6,7 +6,7 @@ private:
 	CustomTexture m_texture;
 	bool m_free;
 	bool m_changeDir;
-	char m_dir;
+	char m_dir = ' ';
 	int m_row;
 	int m_col;
 public:
@@ -22,6 +22,8 @@ public:
 	int col();
 	int row();
 	void changeFree(bool is_free);
-	friend bool operator==(Cell& lcell, Cell& rcell) { return lcell.m_row == rcell.m_row && lcell.m_col == rcell.m_col; }
+
 	friend bool operator==(Cell lcell, Cell rcell) { return lcell.m_row == rcell.m_row && lcell.m_col == rcell.m_col; }
+
+	friend bool operator!=(Cell lcell, Cell rcell) { return lcell.m_row != rcell.m_row && lcell.m_col != rcell.m_col; }
 };

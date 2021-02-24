@@ -5,9 +5,9 @@ BodyPart::~BodyPart() {}
 std::string BodyPart::tag() { return this->m_tag; }
 CustomTexture BodyPart::texture() { return this->m_texture; }
 void BodyPart::render(SDL_Renderer* t_renderer) {
-	SDL_RenderCopy(t_renderer, m_texture.texture(), nullptr, &m_texture.rect());
+	SDL_RenderCopy(t_renderer, m_texture.texture(), nullptr, &m_cell.texture().rect());
 }
-Cell BodyPart::cell() { return this->m_cell; }
+Cell& BodyPart::cell() { return this->m_cell; }
 void BodyPart::setCell(Cell newCell) { 
 	this->m_cell = newCell; 
 	this->m_texture.setRect(newCell.texture().rect());

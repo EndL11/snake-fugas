@@ -34,35 +34,59 @@ void Field::renderField(SDL_Renderer* t_renderer) {
 int Field::rows() { return this->m_rows; }
 int Field::cols() { return this->m_cols; }
 
-Cell Field::nextCellByDirection(Cell current, char dir) {
+Cell& Field::nextCellByDirection(Cell current, char dir) {
 	int row = current.row();
 	int col = current.col();
 	if (dir == 'r') {
 		if (col + 1 >= m_cols) {
-			return Cell();
+			return empty;
 		}
 		return cells[row][++col];
 	}
 	else if (dir == 'l') {
 		if (col - 1 <= -1) {
-			return Cell();
+			return empty;
 		}
 		return cells[row][--col];
 	}
 	else if (dir == 'u') {
 		if (row - 1 <= -1) {
-			return Cell();
+			return empty;
 		}
 		return cells[--row][col];
 	}
 	else if (dir == 'd') {
 		if (row + 1 >= m_rows) {
-			return Cell();
+			return empty;
 		}
 		return cells[++row][col];
 	}
 	else {
-		return Cell();
+		return empty;
 	}
 }
 
+Cell& Field::prevCellByDirection(Cell current, char dir) {
+	int row = current.row();
+	int col = current.col();
+	if (dir == 'r') {
+
+		return cells[row][--col];
+	}
+	else if (dir == 'l') {
+
+		return cells[row][++col];
+	}
+	else if (dir == 'u') {
+
+		return cells[++row][col];
+	}
+	else if (dir == 'd') {
+
+		return cells[--row][col];
+	}
+	else {
+		std::cout << 11 << std::endl;
+		return empty;
+	}
+}
