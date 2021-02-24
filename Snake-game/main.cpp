@@ -6,6 +6,26 @@
 #include "GameManager.h"
 
 
+int loadScore() {
+	//	return score value from file or 0
+	int score = 0;
+	SDL_RWops* file = SDL_RWFromFile("score.bin", "rb");
+	if (file != nullptr) {
+		//	if file exist - read and close
+		SDL_RWread(file, &score, sizeof(score), 1);
+		SDL_RWclose(file);
+	}
+	return score;
+}
+
+void saveScore(int score) {
+	// save score value	
+	SDL_RWops* file = SDL_RWFromFile("score.bin", "wb");
+	SDL_RWwrite(file, &score, sizeof(score), 1);
+	SDL_RWclose(file);
+}
+
+
 SDL_Texture* loadImage(std::string file_name, SDL_Renderer* t_renderer) {
 	SDL_Texture* texture = nullptr;
 	SDL_Surface* surf = nullptr;
@@ -34,7 +54,7 @@ int main(int argc, char** args) {
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 	TTF_Font* font = nullptr;
-	//	TODO: load best score
+	int best_score = loadScore();
 	const int WINDOW_WIDTH = 900;
 	const int WINDOW_HEIGHT = 900;
 
@@ -62,8 +82,6 @@ int main(int argc, char** args) {
 	SDL_Texture* player_texture = loadImage("2.bmp", renderer);
 	SDL_Texture* food_texture = loadImage("4.bmp", renderer);
 	SDL_Rect rect = { 0,0,30,30};
-	//	TODO: change window width and height with map rect
-	SDL_Rect map = {25, 25, WINDOW_WIDTH - 50, WINDOW_HEIGHT - 50};
 
 	GameManager gm(renderer, food_texture);
 	gm.PerformGameSession(rect, cell_texture, player_texture, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -74,7 +92,8 @@ int main(int argc, char** args) {
 		SDL_Event e;
 		SDL_PollEvent(&e);
 		if (e.type == SDL_QUIT) {
-			//	TODO: save best score to file
+			if(gm.score() > best_score)
+				saveScore(gm.score());
 			quit = true;
 			break;
 		}
@@ -92,8 +111,9 @@ int main(int argc, char** args) {
 			SDL_RenderCopy(renderer, text_texture, nullptr, &rect_game_over);
 			SDL_DestroyTexture(text_texture);
 		}
-		//	TODO: show best score
-		//	TODO: make user interface
+		SDL_Rect rect_best_score = { WINDOW_WIDTH - 150, 0, 150, 60 };
+		SDL_Texture* best_score_texture = getTextTexture(font, ("Best Score: " + std::to_string(best_score)), renderer);
+		SDL_RenderCopy(renderer, best_score_texture, nullptr, &rect_best_score);
 
 		SDL_Rect rect_score = { WINDOW_WIDTH / 2 - 30, 0, 40, 60 };
 		SDL_Texture* score_texture = getTextTexture(font, std::to_string(gm.score()), renderer);
