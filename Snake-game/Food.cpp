@@ -25,7 +25,7 @@ void Food::replaceFood(Field t_field) {
 Food Food::generateFood(SDL_Texture* t_texture, Field t_field) {
 	int randRow = rand() % t_field.rows();
 	int randCol = rand() % t_field.cols();
-	Cell cell = t_field.getCell(randRow, randCol);
+	Cell& cell = t_field.getCell(randRow, randCol);
 	while (!cell.free())
 	{
 		randRow = rand() % t_field.rows();

@@ -9,7 +9,7 @@ void GameManager::PerformGameSession(SDL_Rect t_rect, SDL_Texture* cell_texture,
 	Field field(w_w, w_h, t_rect.w, t_rect.h );
 	field.generateField(t_rect, cell_texture);
 	this->m_field = field;
-	Cell cell = m_field.getCell(m_field.rows() / 2, m_field.cols() / 2);
+	Cell& cell = m_field.getCell(m_field.rows() / 2, m_field.cols() / 2);
 	cell.changeFree(false);
 	Snake snake(cell, t_rect, player_texture);
 	player = snake;
@@ -23,13 +23,6 @@ bool GameManager::Render() {
 	player.render(this->renderer);
 
 	if (!game_over) {
-
-		if (need_spawn) {
-			std::cout << "aa" << std::endl;
-			player.createPart(m_field);
-			need_spawn = false;
-		}
-
 		const Uint8* state = SDL_GetKeyboardState(NULL);
 
 		if (state[SDL_SCANCODE_W] && player.getDirection() != 'd') {
@@ -60,6 +53,11 @@ bool GameManager::Render() {
 			std::cout << "Zone over" << std::endl;
 			game_over = true;
 			return false;
+		}
+
+		if (need_spawn) {
+			player.createPart(m_field);
+			need_spawn = false;
 		}
 	}
 
