@@ -1,4 +1,4 @@
-###Snake game
+#Snake game
 
 Try not to move out of window borders and not eat yourself
 
