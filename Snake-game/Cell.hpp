@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-#include "CustomTexture.h"
+#include "CustomTexture.hpp"
 class Cell {
 private:
 	CustomTexture m_texture;

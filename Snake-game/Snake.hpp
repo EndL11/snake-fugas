@@ -1,6 +1,6 @@
 #pragma once
-#include "BodyPart.h"
-#include "Field.h"
+#include "BodyPart.hpp"
+#include "Field.hpp"
 #include <list>
 #include <string>
 class Snake {

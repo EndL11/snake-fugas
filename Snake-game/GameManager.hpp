@@ -1,7 +1,7 @@
 #pragma once
-#include "Field.h"
-#include "Snake.h"
-#include "Food.h"
+#include "Field.hpp"
+#include "Snake.hpp"
+#include "Food.hpp"
 
 class GameManager {
 private:

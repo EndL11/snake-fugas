@@ -1,4 +1,4 @@
-#include "BodyPart.h"
+#include "BodyPart.hpp"
 BodyPart::BodyPart() {}
 BodyPart::BodyPart(Cell t_cell, SDL_Rect t_rect, SDL_Texture* t_texture): m_cell(t_cell), m_texture(t_rect, t_texture) {}
 BodyPart::~BodyPart() {}

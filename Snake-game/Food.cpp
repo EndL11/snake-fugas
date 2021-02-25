@@ -1,4 +1,4 @@
-#include "Food.h"
+#include "Food.hpp"
 Food::Food() {};
 Food::Food(SDL_Rect t_rect, SDL_Texture* t_texture, Cell t_cell) : m_texture(t_rect, t_texture), m_cell(t_cell) {};
 Food::~Food() {};

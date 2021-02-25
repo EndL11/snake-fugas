@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include "Field.h"
-#include "CustomTexture.h"
+#include "Field.hpp"
+#include "CustomTexture.hpp"
 class Food {
 private:
 	CustomTexture m_texture;

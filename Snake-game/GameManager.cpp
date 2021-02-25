@@ -1,4 +1,4 @@
-#include "GameManager.h"
+#include "GameManager.hpp"
 GameManager::GameManager(): m_score(0), renderer(nullptr), food_texture(nullptr), m_food() {};
 GameManager::GameManager(SDL_Renderer* t_renderer, SDL_Texture* t_food_texture)
 	: renderer(t_renderer), m_score(0), m_food(), food_texture(t_food_texture)

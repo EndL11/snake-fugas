@@ -1,4 +1,4 @@
-#include "Cell.h"
+#include "Cell.hpp"
 Cell::Cell() : m_texture(), m_free(true), m_dir(' ') {};
 Cell::Cell(SDL_Rect t_rect, SDL_Texture* t_texture, int t_row, int t_col) 
 	: m_texture(t_rect, t_texture), m_free(true), m_dir(' '), m_row(t_row), m_col(t_col)

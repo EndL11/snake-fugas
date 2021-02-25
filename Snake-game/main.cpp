@@ -3,7 +3,7 @@
 #include <SDL_ttf.h>
 #include <string>
 #include <time.h>
-#include "GameManager.h"
+#include "GameManager.hpp"
 
 
 int loadScore() {
