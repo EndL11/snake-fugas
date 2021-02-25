@@ -1,4 +1,4 @@
-#include "Snake.h"
+#include "Snake.hpp"
 #include <iostream>
 Snake::Snake() {}
 Snake::Snake(Cell t_cell, SDL_Rect t_rect, SDL_Texture* t_texture) {

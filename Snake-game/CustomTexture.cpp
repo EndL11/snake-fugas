@@ -1,4 +1,4 @@
-#include "CustomTexture.h"
+#include "CustomTexture.hpp"
 
 CustomTexture::CustomTexture(SDL_Rect t_rect, SDL_Texture* t_texture): m_rect{ t_rect }, m_texture(t_texture){};
 CustomTexture::CustomTexture()

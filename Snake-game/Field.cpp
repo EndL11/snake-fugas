@@ -1,4 +1,4 @@
-#include "Field.h"
+#include "Field.hpp"
 #include <iostream>
 Field::Field():m_rows(0), m_cols(0) {};
 Field::Field(int WINDOW_WIDTH, int WINDOW_HEIGHT, int w, int h) {
