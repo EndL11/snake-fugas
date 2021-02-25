@@ -1,10 +1,10 @@
-### Snake game
+# Snake game
 
 Try not to move out of window borders and not eat yourself
 
 Eat flowers and be looong as python...
 
-# CONTROLS
+## CONTROLS
 
 W - move up
 
@@ -14,7 +14,7 @@ D - move right
 
 S - move down
 
-# LIBRARIES
+## LIBRARIES
 
 SDL2 (development library) - SDL library, [download](https://www.libsdl.org/download-2.0.php)
 
